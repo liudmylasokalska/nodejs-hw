@@ -20,15 +20,24 @@ const noteSchema = new Schema(
       enum: TAGS,
       default: 'Todo',
     },
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
+    }, // ✅ додано закриваючу дужку
   },
   {
     timestamps: true,
     versionKey: false,
   },
 );
-noteSchema.index({ title: "text", content:"text"},  {
-    name: "NoteTextIndex",
-    default_language: "english",
-});
-  
+
+noteSchema.index(
+  { title: 'text', content: 'text' },
+  {
+    name: 'NoteTextIndex',
+    default_language: 'english',
+  },
+);
+
 export const Note = model('Note', noteSchema);
